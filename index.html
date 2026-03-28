@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manthanam — India's Strategic Think Tank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --bg2: #0e0e0e;
+    --bg3: #141414;
+    --gold: #C9933A;
+    --gold-light: #E8B55A;
+    --gold-pale: #F5D98B;
+    --saffron: #D4601A;
+    --white: #F2EDE4;
+    --white-dim: #B8B0A2;
+    --border: rgba(201,147,58,0.18);
+    --border-subtle: rgba(201,147,58,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.35;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+  /* ── UTILITIES ── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .gold { color: var(--gold); }
+  .saffron { color: var(--saffron); }
+  .italic { font-style: italic; }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--border);
+    padding: 5px 14px; border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 600; line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    color: var(--white-dim);
+    font-size: 13px; font-weight: 300;
+    letter-spacing: 0.5px;
+    max-width: 540px;
+    margin-bottom: 60px;
+  }
+
+  .divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 24px 0;
+  }
+
+  .btn {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 14px 32px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+
+  .btn:hover { color: var(--bg); }
+  .btn:hover::before { transform: translateX(0); }
+
+  .btn-solid {
+    background: var(--gold);
+    color: var(--bg);
+  }
+  .btn-solid::before { background: var(--gold-light); }
+  .btn-solid:hover { color: var(--bg); }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0;
+    transition: all 0.4s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(8,8,8,0.96);
+    border-bottom: 1px solid var(--border-subtle);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-inner {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    max-width: 1200px; margin: 0 auto;
+    padding: 22px 40px;
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 38px; height: 38px;
+    position: relative;
+  }
+
+  .logo-mark svg { width: 100%; height: 100%; }
+
+  .logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px; font-weight: 800;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .logo-text span {
+    display: block;
+    font-size: 8px; font-weight: 400;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: color 0.25s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 10px 24px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    width: 24px; height: 1px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    padding: 160px 0 100px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,147,58,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 70%, rgba(212,96,26,0.03) 0%, transparent 50%),
+      linear-gradient(180deg, #080808 0%, #0a0a0a 50%, #080808 100%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(rgba(201,147,58,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,147,58,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 80px; align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex; align-items: center; gap: 16px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5.5vw, 5.2rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 13px; font-weight: 300;
+    color: var(--white-dim);
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 48px;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-actions {
+    display: flex; gap: 20px; flex-wrap: wrap;
+  }
+
+  .hero-stats {
+    display: grid; gap: 24px;
+    padding-left: 40px;
+    border-left: 1px solid var(--border);
+  }
+
+  .stat-item { }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 9px; font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--white-dim);
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px;
+    font-size: 8px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--white-dim);
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 16px 0;
+    overflow: hidden;
+    background: var(--bg2);
+  }
+
+  .marquee-track {
+    display: flex;
+    animation: marquee 35s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    display: flex; align-items: center; gap: 28px;
+    padding: 0 28px;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--white-dim);
+    flex-shrink: 0;
+  }
+
+  .marquee-dot {
+    width: 4px; height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── PHILOSOPHY ── */
+  #about {
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #about::before {
+    content: 'मंथन';
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28vw; font-weight: 700;
+    color: rgba(201,147,58,0.025);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+
+  .philosophy-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400; font-style: italic;
+    line-height: 1.4;
+    color: var(--white);
+    border-left: 2px solid var(--gold);
+    padding-left: 32px;
+    margin: 40px 0;
+  }
+
+  .pillar-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+
+  .pillar-item {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 20px 24px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(201,147,58,0.02);
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .pillar-item:hover {
+    border-color: var(--border);
+    background: rgba(201,147,58,0.04);
+  }
+
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--gold); opacity: 0.4;
+    line-height: 1; min-width: 32px;
+  }
+
+  .pillar-title {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .pillar-desc {
+    font-size: 12px; color: var(--white-dim);
+    font-weight: 300;
+  }
+
+  /* ── RESEARCH / POLICY BRIEFS ── */
+  #research { padding: 120px 0; background: var(--bg2); }
+
+  .research-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 60px;
+  }
+
+  .briefs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    border: 1px solid var(--border-subtle);
+    background: var(--border-subtle);
+    margin-bottom: 48px;
+  }
+
+  .brief-card {
+    background: var(--bg2);
+    padding: 36px 32px;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+  }
+
+  .brief-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 2px; height: 0;
+    background: var(--gold);
+    transition: height 0.4s ease;
+  }
+
+  .brief-card:hover { background: var(--bg3); }
+  .brief-card:hover::before { height: 100%; }
+
+  .brief-domain {
+    font-size: 8px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 16px;
+  }
+
+  .brief-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 600;
+    line-height: 1.3;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+
+  .brief-excerpt {
+    font-size: 12px; color: var(--white-dim);
+    font-weight: 300; line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .brief-meta {
+    display: flex; justify-content: space-between;
+    align-items: center;
+    font-size: 10px; color: var(--white-dim);
+    letter-spacing: 1px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .brief-read {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── FEATURED INSIGHTS ── */
+  #insights { padding: 120px 0; }
+
+  .insights-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2px;
+    background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .insight-featured {
+    background: var(--bg);
+    padding: 60px 56px;
+    position: relative; overflow: hidden;
+  }
+
+  .insight-featured::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle at 100% 100%, rgba(201,147,58,0.08), transparent 60%);
+    pointer-events: none;
+  }
+
+  .insight-featured .brief-title {
+    font-size: 1.9rem;
+  }
+
+  .insight-featured .brief-excerpt {
+    font-size: 13px;
+    max-width: 420px;
+  }
+
+  .insight-side {
+    display: flex; flex-direction: column;
+    gap: 2px;
+  }
+
+  .insight-small {
+    background: var(--bg2);
+    padding: 32px 36px;
+    flex: 1;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.3s;
+  }
+
+  .insight-small:hover { background: var(--bg3); }
+  .insight-small:last-child { border-bottom: none; }
+
+  /* ── POSITIONING STRIP ── */
+  .position-strip {
+    background: var(--gold);
+    padding: 80px 40px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+
+  .position-strip::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent, transparent 20px,
+      rgba(0,0,0,0.04) 20px, rgba(0,0,0,0.04) 21px
+    );
+  }
+
+  .position-strip blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: var(--bg);
+    line-height: 1.2;
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto;
+  }
+
+  .position-strip cite {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(8,8,8,0.5);
+    margin-top: 20px;
+    font-style: normal;
+  }
+
+  /* ── PODCAST / DISCUSSIONS ── */
+  #discussions { padding: 120px 0; background: var(--bg2); }
+
+  .podcast-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .podcast-card {
+    border: 1px solid var(--border-subtle);
+    padding: 32px;
+    display: flex; gap: 24px;
+    background: var(--bg);
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+
+  .podcast-card:hover {
+    border-color: var(--border);
+    transform: translateY(-2px);
+  }
+
+  .podcast-ep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--gold); opacity: 0.25;
+    line-height: 1; min-width: 56px;
+    padding-top: 4px;
+  }
+
+  .podcast-tag {
+    font-size: 8px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--saffron); margin-bottom: 10px;
+  }
+
+  .podcast-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--white); line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .podcast-meta {
+    font-size: 11px; color: var(--white-dim);
+    font-weight: 300;
+  }
+
+  .podcast-play {
+    width: 44px; height: 44px; flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    align-self: center;
+    transition: all 0.3s;
+    margin-left: auto;
+  }
+
+  .podcast-card:hover .podcast-play {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .podcast-card:hover .podcast-play svg { fill: var(--bg); }
+
+  .podcast-play svg {
+    width: 14px; height: 14px;
+    fill: var(--gold); margin-left: 2px;
+    transition: fill 0.3s;
+  }
+
+  /* ── JOIN US ── */
+  #join { padding: 120px 0; }
+
+  .join-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+
+  .role-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin: 40px 0;
+  }
+
+  .role-card {
+    border: 1px solid var(--border-subtle);
+    padding: 24px 20px;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .role-card:hover {
+    border-color: var(--border);
+    background: rgba(201,147,58,0.03);
+  }
+
+  .role-icon {
+    font-size: 1.5rem; margin-bottom: 12px;
+  }
+
+  .role-name {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px;
+  }
+
+  .role-desc {
+    font-size: 11px; color: var(--white-dim); font-weight: 300;
+  }
+
+  .join-form {
+    background: var(--bg2);
+    border: 1px solid var(--border-subtle);
+    padding: 48px 44px;
+  }
+
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .form-sub {
+    font-size: 12px; color: var(--white-dim);
+    font-weight: 300; margin-bottom: 32px;
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  .form-group label {
+    display: block;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--white-dim); margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0;
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px; font-weight: 300;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .form-group select option { background: var(--bg3); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  /* ── TEAM ── */
+  #team { padding: 120px 0; background: var(--bg2); }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px; background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .team-card {
+    background: var(--bg2);
+    padding: 36px 28px;
+    text-align: center;
+    transition: background 0.3s;
+  }
+
+  .team-card:hover { background: var(--bg3); }
+
+  .team-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(201,147,58,0.2), rgba(212,96,26,0.1));
+    border: 1px solid var(--border);
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--gold);
+  }
+
+  .team-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--white); margin-bottom: 6px;
+  }
+
+  .team-role {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px;
+  }
+
+  .team-bio {
+    font-size: 11px; color: var(--white-dim);
+    font-weight: 300; line-height: 1.6;
+  }
+
+  /* ── CONTACT ── */
+  #contact { padding: 120px 0; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+
+  .contact-info-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 28px;
+    margin: 40px 0;
+  }
+
+  .contact-info-item {
+    display: flex; gap: 20px;
+    align-items: flex-start;
+  }
+
+  .contact-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  .contact-label {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 4px;
+  }
+
+  .contact-value {
+    font-size: 13px; color: var(--white-dim);
+    font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505;
+    border-top: 1px solid var(--border-subtle);
+    padding: 80px 0 40px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; margin-bottom: 60px;
+  }
+
+  .footer-brand p {
+    font-size: 12px; color: var(--white-dim);
+    font-weight: 300; line-height: 1.8;
+    margin-top: 20px; max-width: 280px;
+  }
+
+  .footer-col-title {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+  }
+
+  .footer-col-links {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+
+  .footer-col-links a {
+    font-size: 12px; color: var(--white-dim);
+    font-weight: 300; text-decoration: none;
+    transition: color 0.25s;
+    letter-spacing: 0.3px;
+  }
+
+  .footer-col-links a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 32px;
+    display: flex; justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 10px; color: var(--white-dim);
+    font-weight: 300; letter-spacing: 0.5px;
+  }
+
+  .footer-socials {
+    display: flex; gap: 20px;
+  }
+
+  .footer-socials a {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border-subtle);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .footer-socials a:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 1024px) {
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-stats { display: none; }
+    .briefs-grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .insights-layout { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 24px; }
+    .nav-inner { padding: 20px 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-content { padding: 0 24px; }
+    .briefs-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .join-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .podcast-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .research-header { flex-direction: column; gap: 20px; align-items: flex-start; }
+    .role-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(8,8,8,0.98);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 36px;
+  }
+
+  .mobile-nav.open { display: flex; }
+
+  .mobile-nav a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 600;
+    color: var(--white); text-decoration: none;
+    letter-spacing: 2px;
+    transition: color 0.25s;
+  }
+
+  .mobile-nav a:hover { color: var(--gold); }
+
+  .mobile-close {
+    position: absolute; top: 28px; right: 28px;
+    background: none; border: none;
+    color: var(--white-dim); font-size: 24px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,4 36,34 4,34" fill="none" stroke="#C9933A" stroke-width="1.5"/>
+          <polygon points="20,10 30,28 10,28" fill="rgba(201,147,58,0.15)" stroke="#C9933A" stroke-width="0.8"/>
+          <circle cx="20" cy="36" r="2" fill="#C9933A"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        Manthanam
+        <span>Strategic Think Tank</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#discussions">Discussions</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#join" class="nav-cta">Join the Mission</a>
+    <button class="hamburger" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+  <a href="#about" onclick="document.getElementById('mobileNav').classList.remove('open')">About</a>
+  <a href="#research" onclick="document.getElementById('mobileNav').classList.remove('open')">Research</a>
+  <a href="#insights" onclick="document.getElementById('mobileNav').classList.remove('open')">Insights</a>
+  <a href="#discussions" onclick="document.getElementById('mobileNav').classList.remove('open')">Discussions</a>
+  <a href="#join" onclick="document.getElementById('mobileNav').classList.remove('open')">Join</a>
+  <a href="#contact" onclick="document.getElementById('mobileNav').classList.remove('open')">Contact</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-eyebrow">New Delhi · Est. 2024</div>
+      <h1 class="hero-headline">
+        India Needs<br>
+        <em>Thinkers,</em><br>
+        Not Followers.
+      </h1>
+      <p class="hero-sub">
+        Manthanam is India's youth-driven strategic think tank — forging policy, shaping discourse, and reviving civilizational wisdom at the intersection of geopolitics, security, and statecraft.
+      </p>
+      <div class="hero-actions">
+        <a href="#research" class="btn btn-solid">Explore Research</a>
+        <a href="#about" class="btn">Our Philosophy</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Policy Briefs Published</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Strategic Focus Areas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">200+</div>
+        <div class="stat-label">Young Strategists</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Singular Vision — Bharat</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>Geopolitics</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>National Security</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Strategic Autonomy</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Economic Statecraft</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Indic Civilisation</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Diplomacy</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Defense Doctrine</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Global Trade</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Policy Research</span><span class="marquee-dot"></span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><span>Geopolitics</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>National Security</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Strategic Autonomy</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Economic Statecraft</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Indic Civilisation</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Diplomacy</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Defense Doctrine</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Global Trade</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Policy Research</span><span class="marquee-dot"></span></div>
+  </div>
+</div>
+
+<!-- ══ ABOUT / PHILOSOPHY ══ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-in">
+        <div class="tag">Our Philosophy</div>
+        <h2 class="section-title">The Churning That<br>Produces Wisdom</h2>
+        <div class="divider"></div>
+        <blockquote class="philosophy-quote">
+          "मंथन — the ancient act of churning the cosmic ocean — is how amrit, the nectar of wisdom, was wrested from chaos."
+        </blockquote>
+        <p style="color: var(--white-dim); font-size: 13px; font-weight: 300; line-height: 1.9; margin-bottom: 20px;">
+          Manthanam draws its name and spirit from the Samudra Manthan — the cosmic churning that separated poison from nectar. We believe the same process of rigorous intellectual churning is what India needs today: to distill clear, bold, civilisation-rooted policy from the complex currents of a rapidly changing world.
+        </p>
+        <p style="color: var(--white-dim); font-size: 13px; font-weight: 300; line-height: 1.9; margin-bottom: 36px;">
+          We are not ideologues. We are strategists. We do not merely criticise — we construct. Every analysis we produce, every discussion we host, every brief we publish is an act of intellectual churning: separating noise from signal, dogma from doctrine, reaction from strategy.
+        </p>
+        <a href="#join" class="btn">Be Part of the Churning</a>
+      </div>
+
+      <div class="fade-in" style="transition-delay: 0.2s;">
+        <ul class="pillar-list">
+          <li class="pillar-item">
+            <div class="pillar-num">01</div>
+            <div>
+              <div class="pillar-title">Geopolitics & International Relations</div>
+              <div class="pillar-desc">Analysing power, alliances, and India's role in a multipolar world.</div>
+            </div>
+          </li>
+          <li class="pillar-item">
+            <div class="pillar-num">02</div>
+            <div>
+              <div class="pillar-title">National Security & Defense Strategy</div>
+              <div class="pillar-desc">Building frameworks for strategic deterrence and military modernisation.</div>
+            </div>
+          </li>
+          <li class="pillar-item">
+            <div class="pillar-num">03</div>
+            <div>
+              <div class="pillar-title">Economic Policy & Global Trade</div>
+              <div class="pillar-desc">Crafting India's economic doctrine for the century of Asian ascent.</div>
+            </div>
+          </li>
+          <li class="pillar-item">
+            <div class="pillar-num">04</div>
+            <div>
+              <div class="pillar-title">Strategic Alliances & Diplomacy</div>
+              <div class="pillar-desc">Mapping the architecture of India's foreign partnerships.</div>
+            </div>
+          </li>
+          <li class="pillar-item">
+            <div class="pillar-num">05</div>
+            <div>
+              <div class="pillar-title">Indic Civilisational Values</div>
+              <div class="pillar-desc">Reviving Sanatan Dharma's philosophical framework as a governance lens.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESEARCH / POLICY BRIEFS ══ -->
+<section id="research">
+  <div class="container">
+    <div class="research-header">
+      <div>
+        <div class="tag">Policy Briefs</div>
+        <h2 class="section-title">Latest Research &<br>Policy Analyses</h2>
+        <p class="section-sub" style="margin-bottom: 0;">Evidence-based, action-oriented policy documents for India's strategic community.</p>
+      </div>
+      <a href="#" class="btn">View All Briefs</a>
+    </div>
+
+    <!-- briefs-grid: empty, ready for real content to be added -->
+    <div class="briefs-grid fade-in" id="briefs-container"></div>
+  </div>
+</section>
+
+<!-- ══ FEATURED INSIGHTS ══ -->
+<section id="insights">
+  <div class="container">
+    <div class="tag fade-in">Strategic Insights</div>
+    <div class="section-title fade-in" style="margin-bottom: 48px;">Depth. Clarity. <em class="italic" style="color:var(--gold)">Conviction.</em></div>
+    <div class="insights-layout fade-in">
+      <div class="insight-featured">
+        <div class="brief-domain">Featured Analysis</div>
+        <h3 class="brief-title" style="font-size:1.9rem; margin-bottom: 18px;">The Indic Century: Why the 21st Century Belongs to Those Who Understand Bharat's Civilisational Depth</h3>
+        <p class="brief-excerpt" style="font-size:13px; max-width: 440px;">Civilisations do not rise by mimicry. They rise by reclaiming their epistemic core. India's ascent in the 21st century will not be measured by GDP alone — it will be measured by how deeply it re-roots its governance, diplomacy, and defence doctrine in its own civilisational matrix. Manthanam exists to accelerate that reckoning.</p>
+        <div style="margin-top: 8px;">
+          <a href="#" class="btn">Read Full Analysis</a>
+        </div>
+      </div>
+      <!-- insight-side: empty, ready for future content -->
+      <div class="insight-side" id="insights-side-container"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ POSITIONING STRIP ══ -->
+<div class="position-strip">
+  <blockquote>
+    "Policy is the weapon of the 21st century. And India must learn to wield it."
+    <cite>— Manthanam Positioning Statement</cite>
+  </blockquote>
+</div>
+
+<!-- ══ DISCUSSIONS / PODCAST ══ -->
+<section id="discussions">
+  <div class="container">
+    <div class="research-header">
+      <div>
+        <div class="tag">Discussions & Podcasts</div>
+        <h2 class="section-title">Ideas in Conversation</h2>
+        <p class="section-sub" style="margin-bottom: 0;">Long-form strategic conversations for the intellectually serious.</p>
+      </div>
+      <a href="#" class="btn">All Episodes</a>
+    </div>
+
+    <!-- podcast-grid: empty, ready for future episode uploads -->
+    <div class="podcast-grid fade-in" id="podcast-container"></div>
+  </div>
+</section>
+
+<!-- ══ JOIN ══ -->
+<section id="join">
+  <div class="container">
+    <div class="join-grid">
+      <div class="fade-in">
+        <div class="tag">Join Manthanam</div>
+        <h2 class="section-title">Become a Strategist.<br>Shape India's Future.</h2>
+        <div class="divider"></div>
+        <p style="color: var(--white-dim); font-size: 13px; font-weight: 300; line-height: 1.9; margin-bottom: 36px;">
+          Manthanam is not a student club. It is a civilisational project. We are building a community of India's sharpest young minds — those who refuse to accept mediocrity in policy, governance, and strategic thought. If you are relentless, rigorous, and rooted in a love for Bharat — you belong here.
+        </p>
+
+        <div class="role-grid">
+          <div class="role-card">
+            <div class="role-icon">✦</div>
+            <div class="role-name">Policy Researcher</div>
+            <div class="role-desc">Write briefs, contribute analyses, engage with strategic debates.</div>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">◈</div>
+            <div class="role-name">Discussion Fellow</div>
+            <div class="role-desc">Participate in roundtables, debates, and podcast conversations.</div>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">⬡</div>
+            <div class="role-name">Campus Ambassador</div>
+            <div class="role-desc">Represent Manthanam at your university or institution.</div>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">◯</div>
+            <div class="role-name">Strategic Partner</div>
+            <div class="role-desc">Collaborate as an organisation, institution, or policy expert.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="join-form fade-in" style="transition-delay: 0.2s;">
+        <div class="form-title">Apply to Join</div>
+        <div class="form-sub">We review every application personally. Be honest. Be bold.</div>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Role of Interest</label>
+          <select>
+            <option value="">Select a role</option>
+            <option>Policy Researcher</option>
+            <option>Discussion Fellow</option>
+            <option>Campus Ambassador</option>
+            <option>Strategic Partner</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Strategic Focus</label>
+          <select>
+            <option value="">Your area of focus</option>
+            <option>Geopolitics & IR</option>
+            <option>National Security</option>
+            <option>Economic Policy</option>
+            <option>Diplomacy</option>
+            <option>Indic Civilisation</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Why Manthanam?</label>
+          <textarea placeholder="Tell us what drives you. What India problem keeps you up at night?"></textarea>
+        </div>
+        <button class="btn btn-solid" style="width: 100%; text-align: center; border: none; cursor: pointer;">Submit Application</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEAM ══ -->
+<section id="team">
+  <div class="container">
+    <div class="tag fade-in">The Founding Team</div>
+    <h2 class="section-title fade-in" style="margin-bottom: 48px;">The Mind Behind<br>the Churning</h2>
+    <div class="fade-in" style="display:flex; justify-content:center;">
+      <div class="team-card" style="width:300px; border:1px solid var(--border); background:var(--bg2);">
+        <div class="team-avatar">H</div>
+        <div class="team-name">Harshdev Garg</div>
+        <div class="team-role">Founder &amp; Director, Manthanam</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECOND POSITIONING ══ -->
+<div style="background: var(--bg3); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); padding: 80px 40px; text-align: center;">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <div class="tag" style="margin-bottom: 24px;">Our Conviction</div>
+    <p style="font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 400; line-height: 1.5; color: var(--white);">
+      "The greatest civilisations did not inherit their greatness — they manufactured it through the ruthless discipline of ideas. Bharat's moment is not coming. It is <em style="color: var(--gold); font-style: italic;">here.</em>"
+    </p>
+  </div>
+</div>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="fade-in">
+        <div class="tag">Get in Touch</div>
+        <h2 class="section-title">Connect With<br>Manthanam</h2>
+        <div class="divider"></div>
+        <p style="color: var(--white-dim); font-size: 13px; font-weight: 300; line-height: 1.9; margin-bottom: 8px;">
+          For collaboration, media inquiries, research partnerships, speaking engagements, or to explore how Manthanam can contribute to your institution's policy work — reach out.
+        </p>
+        <ul class="contact-info-list">
+          <li class="contact-info-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value"><a href="mailto:manthanam.thinktank@gmail.com" style="color:var(--white-dim); text-decoration:none;">manthanam.thinktank@gmail.com</a></div>
+            </div>
+          </li>
+          <li class="contact-info-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <div>
+              <div class="contact-label">Location</div>
+              <div class="contact-value">New Delhi, India</div>
+            </div>
+          </li>
+          <li class="contact-info-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Twitter / X</div>
+              <div class="contact-value"><a href="https://twitter.com/harshgarg_ind" target="_blank" rel="noopener" style="color:var(--white-dim); text-decoration:none;">@harshgarg_ind</a></div>
+            </div>
+          </li>
+          <li class="contact-info-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"></circle></svg>
+            </div>
+            <div>
+              <div class="contact-label">Instagram</div>
+              <div class="contact-value"><a href="https://instagram.com/manthanam_thinktank" target="_blank" rel="noopener" style="color:var(--white-dim); text-decoration:none;">@manthanam_thinktank</a></div>
+            </div>
+          </li>
+        </ul>
+        <div style="padding: 32px; border: 1px solid var(--border-subtle); background: rgba(201,147,58,0.02);">
+          <div style="font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px;">Media &amp; Press</div>
+          <p style="font-size: 12px; color: var(--white-dim); font-weight: 300; line-height: 1.7;">For interview requests, expert commentary, or press materials, write to <a href="mailto:manthanam.thinktank@gmail.com" style="color: var(--white); text-decoration:none;">manthanam.thinktank@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="fade-in" style="transition-delay: 0.2s;">
+        <div class="join-form">
+          <div class="form-title">Send a Message</div>
+          <div class="form-sub">We read every message. Strategic clarity in your writing is appreciated.</div>
+          <div class="form-group">
+            <label>Name & Designation</label>
+            <input type="text" placeholder="Name, Organisation / Institution">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select>
+              <option>Research Collaboration</option>
+              <option>Media / Press Inquiry</option>
+              <option>Speaking Engagement</option>
+              <option>Partnership Proposal</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Your message..." style="min-height: 140px;"></textarea>
+          </div>
+          <button class="btn btn-solid" style="width: 100%; text-align: center; border: none; cursor: pointer;">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 32px; height: 32px;">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+              <polygon points="20,4 36,34 4,34" fill="none" stroke="#C9933A" stroke-width="1.5"/>
+              <polygon points="20,10 30,28 10,28" fill="rgba(201,147,58,0.15)" stroke="#C9933A" stroke-width="0.8"/>
+              <circle cx="20" cy="36" r="2" fill="#C9933A"/>
+            </svg>
+          </div>
+          <span style="font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--white);">Manthanam</span>
+        </div>
+        <p>India's youth-driven strategic think tank. Forging policy, shaping civilisational discourse, and positioning Bharat as a global intellectual power.</p>
+        <p style="margin-top: 16px; font-size: 11px; color: rgba(184,176,162,0.5);">New Delhi, India · Est. 2024</p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Research</div>
+        <ul class="footer-col-links">
+          <li><a href="#">Policy Briefs</a></li>
+          <li><a href="#">Strategic Analyses</a></li>
+          <li><a href="#">Working Papers</a></li>
+          <li><a href="#">Op-Eds</a></li>
+          <li><a href="#">Data & Reports</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Organisation</div>
+        <ul class="footer-col-links">
+          <li><a href="#about">About Manthanam</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#join">Join Us</a></li>
+          <li><a href="#">Advisory Board</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Focus Areas</div>
+        <ul class="footer-col-links">
+          <li><a href="#">Geopolitics & IR</a></li>
+          <li><a href="#">National Security</a></li>
+          <li><a href="#">Economic Policy</a></li>
+          <li><a href="#">Strategic Alliances</a></li>
+          <li><a href="#">Indic Civilisation</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Manthanam Strategic Think Tank. All rights reserved.</div>
+      <div class="footer-socials">
+        <a href="https://twitter.com/harshgarg_ind" target="_blank" rel="noopener" title="Twitter / X" style="width:44px;height:44px;font-size:16px;font-weight:800;">𝕏</a>
+        <a href="https://instagram.com/manthanam_thinktank" target="_blank" rel="noopener" title="Instagram" style="width:44px;height:44px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scr
