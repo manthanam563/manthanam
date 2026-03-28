@@ -958,6 +958,9 @@
     .footer-grid { grid-template-columns: 1fr; gap: 40px; }
     .research-header { flex-direction: column; gap: 20px; align-items: flex-start; }
     .role-grid { grid-template-columns: 1fr; }
+    .founder-card { grid-template-columns: 1fr !important; }
+    .founder-card-left { border-right: none !important; border-bottom: 1px solid var(--border-subtle); }
+    .founder-vision-grid { grid-template-columns: 1fr !important; }
   }
 
   /* ── MOBILE NAV ── */
@@ -1310,24 +1313,92 @@
   <div class="container">
     <div class="tag fade-in">The Founding Team</div>
     <h2 class="section-title fade-in" style="margin-bottom: 48px;">The Mind Behind<br>the Churning</h2>
+
     <div class="fade-in" style="display:flex; justify-content:center;">
-      <div class="team-card" style="width:300px; border:1px solid var(--border); background:var(--bg2);">
-        <div class="team-avatar">H</div>
-        <div class="team-name">Harshdev Garg</div>
-        <div class="team-role">Founder &amp; Director, Manthanam</div>
-        <p style="font-size:12px; color:var(--white-dim); margin-top:10px;">
-Harshdev Garg is the Founder of Manthanam, a youth-led strategic think tank focused on geopolitics, national security, and civilizational revival. His vision is to build a generation of thinkers who shape India's future through ideas, not imitation.
-</p>
+      <div class="founder-card" style="
+        width: 100%;
+        max-width: 860px;
+        border: 1px solid var(--border);
+        background: var(--bg2);
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        overflow: hidden;
+        transition: border-color 0.3s;
+      " onmouseover="this.style.borderColor='rgba(201,147,58,0.35)'" onmouseout="this.style.borderColor='rgba(201,147,58,0.18)'">
 
-<h4 style="margin-top:20px; color:var(--gold);">Vision</h4>
-<p style="font-size:12px; color:var(--white-dim);">
-To establish Manthanam as India's leading youth-driven strategic think tank — shaping national policy discourse and strengthening Bharat's global position.
-</p>
+        <!-- Left: Avatar + Name + Role -->
+        <div class="founder-card-left" style="
+          padding: 48px 36px;
+          border-right: 1px solid var(--border-subtle);
+          display: flex; flex-direction: column; align-items: center;
+          justify-content: flex-start;
+          text-align: center;
+          background: rgba(201,147,58,0.02);
+        ">
+          <div class="team-avatar" style="width:88px; height:88px; font-size:2rem; margin-bottom:24px;">H</div>
+          <div class="team-name" style="font-size:1.4rem; margin-bottom:10px;">Harshdev Garg</div>
+          <div class="team-role" style="line-height:1.6;">Founder &amp; Director<br>Manthanam</div>
+          <div style="width:40px; height:1px; background:linear-gradient(90deg, transparent, var(--gold), transparent); margin: 24px auto 0;"></div>
+        </div>
 
-<h4 style="margin-top:20px; color:var(--gold);">Mission</h4>
-<p style="font-size:12px; color:var(--white-dim);">
-To empower youth with strategic thinking, conduct meaningful discussions, and contribute to India's rise as a global power through research and dialogue.
-</p>
+        <!-- Right: Bio + Vision + Mission -->
+        <div style="padding: 48px 44px;">
+
+          <p style="
+            font-size: 13px;
+            color: var(--white-dim);
+            font-weight: 300;
+            line-height: 1.9;
+            margin-bottom: 32px;
+          ">
+            Harshdev Garg is the Founder of Manthanam, a youth-led strategic think tank focused on geopolitics, national security, and civilizational revival. His vision is to build a generation of thinkers who shape India's future through ideas, not imitation.
+          </p>
+
+          <div class="founder-vision-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+            <div style="
+              padding: 24px;
+              border: 1px solid var(--border-subtle);
+              background: rgba(201,147,58,0.02);
+              transition: border-color 0.3s, background 0.3s;
+            " onmouseover="this.style.borderColor='rgba(201,147,58,0.18)'; this.style.background='rgba(201,147,58,0.04)'" onmouseout="this.style.borderColor='rgba(201,147,58,0.08)'; this.style.background='rgba(201,147,58,0.02)'">
+              <div style="
+                font-size: 8px; font-weight: 700;
+                letter-spacing: 3px; text-transform: uppercase;
+                color: var(--gold); margin-bottom: 12px;
+                display: flex; align-items: center; gap: 10px;
+              ">
+                <span style="width:20px; height:1px; background:var(--gold); display:inline-block;"></span>
+                Vision
+              </div>
+              <p style="font-size:12px; color:var(--white-dim); font-weight:300; line-height:1.8;">
+                To establish Manthanam as India's leading youth-driven strategic think tank — shaping national policy discourse and strengthening Bharat's global position.
+              </p>
+            </div>
+
+            <div style="
+              padding: 24px;
+              border: 1px solid var(--border-subtle);
+              background: rgba(201,147,58,0.02);
+              transition: border-color 0.3s, background 0.3s;
+            " onmouseover="this.style.borderColor='rgba(201,147,58,0.18)'; this.style.background='rgba(201,147,58,0.04)'" onmouseout="this.style.borderColor='rgba(201,147,58,0.08)'; this.style.background='rgba(201,147,58,0.02)'">
+              <div style="
+                font-size: 8px; font-weight: 700;
+                letter-spacing: 3px; text-transform: uppercase;
+                color: var(--saffron); margin-bottom: 12px;
+                display: flex; align-items: center; gap: 10px;
+              ">
+                <span style="width:20px; height:1px; background:var(--saffron); display:inline-block;"></span>
+                Mission
+              </div>
+              <p style="font-size:12px; color:var(--white-dim); font-weight:300; line-height:1.8;">
+                To empower youth with strategic thinking, conduct meaningful discussions, and contribute to India's rise as a global power through research and dialogue.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1347,7 +1418,7 @@ To empower youth with strategic thinking, conduct meaningful discussions, and co
 <section id="contact">
   <div class="container">
     <div class="contact-grid">
-      <div class="fade-in">
+      <div class="fade-in visible">
         <div class="tag">Get in Touch</div>
         <h2 class="section-title">Connect With<br>Manthanam</h2>
         <div class="divider"></div>
@@ -1361,7 +1432,7 @@ To empower youth with strategic thinking, conduct meaningful discussions, and co
             </div>
             <div>
               <div class="contact-label">Email</div>
-              <div class="contact-value"><a href="mailto:manthanam.thinktank@gmail.com" style="color:var(--white-dim); text-decoration:none;">manthanam.thinktank@gmail.com</a></div>
+              <div class="contact-value"><a href="mailto:manthanam.thinktank@gmail.com" style="color:var(--white-dim); text-decoration:none;">manthanam.thinktank&#64;gmail.com</a></div>
             </div>
           </li>
           <li class="contact-info-item">
@@ -1394,11 +1465,11 @@ To empower youth with strategic thinking, conduct meaningful discussions, and co
         </ul>
         <div style="padding: 32px; border: 1px solid var(--border-subtle); background: rgba(201,147,58,0.02);">
           <div style="font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px;">Media &amp; Press</div>
-          <p style="font-size: 12px; color: var(--white-dim); font-weight: 300; line-height: 1.7;">For interview requests, expert commentary, or press materials, write to <a href="mailto:manthanam.thinktank@gmail.com" style="color: var(--white); text-decoration:none;">manthanam.thinktank@gmail.com</a></p>
+          <p style="font-size: 12px; color: var(--white-dim); font-weight: 300; line-height: 1.7;">For interview requests, expert commentary, or press materials, write to <a href="mailto:manthanam.thinktank@gmail.com" style="color: var(--white); text-decoration:none;">manthanam.thinktank&#64;gmail.com</a></p>
         </div>
       </div>
 
-      <div class="fade-in" style="transition-delay: 0.2s;">
+      <div class="fade-in visible" style="transition-delay: 0.2s;">
         <div class="join-form">
           <div class="form-title">Send a Message</div>
           <div class="form-sub">We read every message. Strategic clarity in your writing is appreciated.</div>
@@ -1504,4 +1575,17 @@ To empower youth with strategic thinking, conduct meaningful discussions, and co
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scr
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
